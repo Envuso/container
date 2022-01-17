@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
-  "name": "@envuso/package-manager",
+  "name": "@envuso/container",
   "author": "Sam Parton @iDevelopThings",
   "description": "Envuso is a backend framework focusing building apis using Fastify and MongoDB support.",
   "license": "MIT",
