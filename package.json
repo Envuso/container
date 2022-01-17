@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1-1",
+  "version": "0.0.1-2",
   "name": "@envuso/container",
   "author": "Sam Parton @iDevelopThings",
   "description": "Envuso is a backend framework focusing building apis using Fastify and MongoDB support.",
@@ -10,7 +10,6 @@
     "dev": "ts-node-dev --respawn --rs --transpile-only src/index.ts --input-type=module"
   },
   "dependencies": {
-    "@envuso/utilities": "^0.0.4-3",
     "@types/is": "^0.0.21",
     "is": "^3.3.0",
     "is-what": "^4.1.0",
@@ -20,6 +19,8 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@envuso/types": "^0.0.1",
+    "@envuso/utilities": "^0.0.4-9",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "^14.14.41",
@@ -31,6 +32,6 @@
     "typescript": "^4.4.2"
   },
   "files": [
-    "./dist/**/*"
+    "dist/**/*"
   ]
 }

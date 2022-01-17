@@ -1,4 +1,4 @@
-import {Classes} from "@envuso/utilities";
+import {Classes, FileLoader} from "@envuso/utilities";
 import path from "path";
 import {LookupIocEntryException} from "../Exceptions/LookupIocEntryException";
 import {Reflection} from "../Reflector/Reflection";
@@ -10,7 +10,7 @@ import {IocNamespaceEntries} from "./IocNamespaceEntries";
 
 let instance: IocContainer = null;
 
-IocNamespaceEntries.projectRootPath = path.join(process.cwd(), 'src');
+IocNamespaceEntries.projectRootPath = path.join(process.cwd());
 
 export class IocContainer {
 
@@ -48,6 +48,24 @@ export class IocContainer {
 
 	tags(): IocEntryTags {
 		return this._tags;
+	}
+
+	async registerClassesOfTypeInDirectory(type: string, baseNamespace: string, directory: string): Promise<IocContainerEntry[]> {
+		const classes = await FileLoader.importClassesOfTypeFrom(
+			path.join(directory, '**', '*.ts'), type,
+		);
+
+		const registrations: IocContainerEntry[] = [];
+
+		for (let classImport of classes) {
+			const entry = this.register(path.join(baseNamespace, classImport.name))
+				.assignClassPath(classImport.forRunEnvironment)
+				.assignDefaultExport(classImport.export);
+
+			registrations.push(entry);
+		}
+
+		return registrations;
 	}
 
 	register(namespace: string): IocContainerEntry {

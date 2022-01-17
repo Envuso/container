@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import path from "path";
 import {IocContainer} from "../src/Container/IocContainer";
 import {IocContainerEntry} from "../src/Container/IocContainerEntry";
 import {TestingClass} from "./Classes/TestingClass";
@@ -93,6 +94,20 @@ describe('Container.ts', function () {
 		const resolved = container.resolve('App/TestingString');
 
 		expect(resolved).toEqual(resolveString);
+	});
+
+	test('register classes of type in directory', async () => {
+		const classes = await container.registerClassesOfTypeInDirectory(
+			'Controller',
+			'App/Http/Controllers',
+			path.join(process.cwd(), 'tests', 'Classes')
+		)
+
+
+		const resolved = container.resolve('App/Http/Controllers/TestingController');
+		const make = container.make('App/Http/Controllers/TestingController');
+
+		debugger;
 	});
 
 	test('it can register constructor args to be resolved when resolving', async () => {
