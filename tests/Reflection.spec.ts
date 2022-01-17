@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import {LoadClassDecorator, LoadMethodDecorator} from "../Decorators/LoadClassDecorator";
-import {Reflection} from "../Reflector/Reflection";
+import {LoadClassDecorator, LoadMethodDecorator} from "../src/Decorators/LoadClassDecorator";
+import {Reflection} from "../src/Reflector/Reflection";
 
 describe('Reflection.ts', function () {
 

@@ -38,13 +38,15 @@
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "resolveJsonModule": true,
-
+    "resolveJsonModule": true
   },
+  "include": [
+    "./src/**/*.ts"
+  ],
   "exclude": [
     "./node_modules",
     "./dist",
-    "./src/tests"
+    "./tests"
   ],
   "ts-node": {
     "compilerOptions": {

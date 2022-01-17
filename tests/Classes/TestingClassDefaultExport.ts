@@ -1,4 +1,4 @@
-import {RegisterWithContainer} from "../../Decorators/RegisterWithContainer";
+import {RegisterWithContainer} from "../../src/Decorators/RegisterWithContainer";
 
 @RegisterWithContainer()
 export default class TestingClassDefaultExport {

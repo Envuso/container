@@ -1,4 +1,4 @@
-import {Register} from "../../Decorators/RegisterWithContainer";
+import {Register} from "../../src/Decorators/RegisterWithContainer";
 import {AnotherTestingClass} from "./TestingClass";
 
 @Register('App/TestingClassViaDecorator', __filename)

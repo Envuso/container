@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import {IocContainer} from "../Container/IocContainer";
-import {IocContainerEntry} from "../Container/IocContainerEntry";
+import {IocContainer} from "../src/Container/IocContainer";
+import {IocContainerEntry} from "../src/Container/IocContainerEntry";
 import {TestingClass} from "./Classes/TestingClass";
 import {TestingClassViaDecorator} from "./Classes/TestingClassViaDecorator";
 
