@@ -100,12 +100,16 @@ describe('Container.ts', function () {
 		const classes = await container.registerClassesOfTypeInDirectory(
 			'Controller',
 			'App/Http/Controllers',
-			path.join(process.cwd(), 'tests', 'Classes')
-		)
+			path.join(process.cwd(), 'tests', 'Classes'),
+			entry => {
+				entry.meta().set('testing', 'yeet');
 
+				return entry;
+			}
+		);
 
 		const resolved = container.resolve('App/Http/Controllers/TestingController');
-		const make = container.make('App/Http/Controllers/TestingController');
+		const make     = container.make('App/Http/Controllers/TestingController');
 
 		debugger;
 	});
@@ -127,14 +131,14 @@ describe('Container.ts', function () {
 		debugger
 	});
 
-	test('it can register tagged class/namespace', async () =>{
+	test('it can register tagged class/namespace', async () => {
 		const entry = container.register('App/TestingController')
 			.assignAlias('test-controller')
 			.assignClassPath('tests/Classes/TestingController')
 			.assignTag('Controller');
 
 		const resolved = container.resolve('App/TestingController');
-		const make = container.make('App/TestingController');
+		const make     = container.make('App/TestingController');
 
 		debugger;
 

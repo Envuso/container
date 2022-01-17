@@ -50,7 +50,12 @@ export class IocContainer {
 		return this._tags;
 	}
 
-	async registerClassesOfTypeInDirectory(type: string, baseNamespace: string, directory: string): Promise<IocContainerEntry[]> {
+	async registerClassesOfTypeInDirectory(
+		type: string,
+		baseNamespace: string,
+		directory: string,
+		forEach?: (entry: IocContainerEntry) => IocContainerEntry
+	): Promise<IocContainerEntry[]> {
 		const classes = await FileLoader.importClassesOfTypeFrom(
 			path.join(directory, '**', '*.ts'), type,
 		);
@@ -62,7 +67,7 @@ export class IocContainer {
 				.assignClassPath(classImport.forRunEnvironment)
 				.assignDefaultExport(classImport.export);
 
-			registrations.push(entry);
+			registrations.push(forEach(entry));
 		}
 
 		return registrations;

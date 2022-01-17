@@ -1,5 +1,3 @@
-import {Classes} from "@envuso/utilities";
-import {Reflection} from "../Reflector/Reflection";
 import {IocContainer} from "./IocContainer";
 import {BindingCallback} from "./IocContainerTypes";
 import {IocEntryDependencies} from "./IocEntryDependencies";
@@ -14,10 +12,11 @@ export type EntryMethodRegistration = {
 
 export class IocContainerEntry {
 
-	private _tags: string[] = [];
+	private _tags: string[]         = [];
 	private _namespace: string;
 	private _classPath: string;
-	private _defaultExport: string = null;
+	private _defaultExport: string  = null;
+	private _meta: Map<string, any> = new Map();
 
 	private _dependencies: IocEntryDependencies = new IocEntryDependencies();
 
@@ -30,7 +29,6 @@ export class IocContainerEntry {
 	private type: 'singleton' | 'regular' = 'regular';
 
 	private cachedInstance: any = null;
-
 
 	constructor(public container: IocContainer, namespace: string) {
 		this._namespace = namespace;
@@ -163,5 +161,9 @@ export class IocContainerEntry {
 
 	public dependencies(): IocEntryDependencies {
 		return this._dependencies;
+	}
+
+	public meta(): Map<string, any> {
+		return this._meta;
 	}
 }
