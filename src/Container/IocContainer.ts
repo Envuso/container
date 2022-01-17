@@ -5,6 +5,7 @@ import {Reflection} from "../Reflector/Reflection";
 import {IocContainerEntry} from "./IocContainerEntry";
 import {BindingCallback, IocEntryParameterInfo} from "./IocContainerTypes";
 import {IocEntryAlias} from "./IocEntryAlias";
+import {IocEntryTags} from "./IocEntryTags";
 import {IocNamespaceEntries} from "./IocNamespaceEntries";
 
 let instance: IocContainer = null;
@@ -16,6 +17,8 @@ export class IocContainer {
 	private _namespaces: IocNamespaceEntries = new IocNamespaceEntries();
 
 	private _aliases: IocEntryAlias = new IocEntryAlias();
+
+	private _tags: IocEntryTags = new IocEntryTags();
 
 	private _entries: Map<string, IocContainerEntry> = new Map();
 
@@ -41,6 +44,10 @@ export class IocContainer {
 
 	aliases(): IocEntryAlias {
 		return this._aliases;
+	}
+
+	tags(): IocEntryTags {
+		return this._tags;
 	}
 
 	register(namespace: string): IocContainerEntry {
@@ -120,9 +127,9 @@ export class IocContainer {
 		const entry    = this.lookup(namespace);
 		const resolved = this.resolve<new (...args: any[]) => any>(namespace);
 
-		let args: (IocEntryParameterInfo & { value: any})[] = entry.dependencies().getDependencyArgs()
-		args = args.map((arg) => {
-			if(arg.typeOfDependency === 'binding') {
+		let args: (IocEntryParameterInfo & { value: any })[] = entry.dependencies().getDependencyArgs();
+		args                                                 = args.map((arg) => {
+			if (arg.typeOfDependency === 'binding') {
 				if (this.namespaces().has(arg.value)) {
 					return this.make(arg.value);
 				}

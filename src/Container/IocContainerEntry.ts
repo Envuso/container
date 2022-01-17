@@ -14,6 +14,7 @@ export type EntryMethodRegistration = {
 
 export class IocContainerEntry {
 
+	private _tags: string[] = [];
 	private _namespace: string;
 	private _classPath: string;
 	private _defaultExport: string = null;
@@ -112,6 +113,16 @@ export class IocContainerEntry {
 
 	public namespace() {
 		return this._namespace;
+	}
+
+	public assignTag(tag: string) {
+		this.container.tags().register(
+			this._namespace, tag
+		);
+
+		this._tags.push(tag);
+
+		return this;
 	}
 
 	public classPath() {

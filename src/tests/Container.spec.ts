@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import {IocContainer} from "../Container/IocContainer";
 import {IocContainerEntry} from "../Container/IocContainerEntry";
-import {TestingClass} from "../TestingClass";
-import {TestingClassViaDecorator} from "../TestingClassViaDecorator";
+import {TestingClass} from "./Classes/TestingClass";
+import {TestingClassViaDecorator} from "./Classes/TestingClassViaDecorator";
 
 describe('Container.ts', function () {
 
@@ -112,6 +112,19 @@ describe('Container.ts', function () {
 		debugger
 	});
 
+	test('it can register tagged class/namespace', async () =>{
+		const entry = container.register('App/TestingController')
+			.assignAlias('test-controller')
+			.assignClassPath('tests/Classes/TestingController')
+			.assignTag('Controller');
+
+		const resolved = container.resolve('App/TestingController');
+		const make = container.make('App/TestingController');
+
+		debugger;
+
+
+	});
 
 	test('it can resolve constructor params from reflection', async () => {
 		// It needs to be imported somewhere for decorators to trigger.

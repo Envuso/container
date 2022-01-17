@@ -1,7 +1,6 @@
 import "reflect-metadata";
 
 import {IocContainer} from "../Container/IocContainer";
-import {DESIGN_PARAM_TYPES} from "../DesignTypes";
 import {Reflection} from "../Reflector/Reflection";
 
 export function Register(namespace: string, classPath: string, container?: IocContainer) {
